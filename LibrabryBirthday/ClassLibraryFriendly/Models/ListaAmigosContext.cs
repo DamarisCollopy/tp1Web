@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace ClassLibraryFriendly
+namespace ClassLibraryFriendly.Models
 {
     public partial class ListaAmigosContext : DbContext
     {

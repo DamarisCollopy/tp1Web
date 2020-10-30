@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ClassLibraryFriendly;
+using ClassLibraryFriendly.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
 namespace WebLibraryFriends
@@ -26,9 +23,15 @@ namespace WebLibraryFriends
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddDistributedMemoryCache();
+
             services.AddDbContext<ListaAmigosContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("ListaAmigos")));
+
+           
 
         }
 

@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ClassLibraryFriendly;
+using ClassLibraryFriendly.Models;
 
 namespace WebLibraryFriends.Controllers
 {
     public class FriendsController : Controller
     {
         private readonly ListaAmigosContext _context;
+        private readonly IGerenciamentoCookie gCookie;
 
-        public FriendsController(ListaAmigosContext context)
+        public FriendsController(ListaAmigosContext context, IGerenciamentoCookie gCookie)
         {
             _context = context;
+            this.gCookie = gCookie;
         }
 
         // GET: Friends
@@ -57,11 +60,52 @@ namespace WebLibraryFriends.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(table);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                gCookie.Create(" Nome", "Sobrenome", "Email ", "data");
+                //string data = table.DataNascimento.ToString("dd/MM/yyyy HH:mm:ss");
+                //CookieOptions option = new CookieOptions();
+                //option.Expires = DateTime.Now.AddMinutes(10);
+                //Response.Cookies.Append("nome", table.Nome, option);
+                //Response.Cookies.Append("Sobrenome", table.Sobrenome, option);
+                //Response.Cookies.Append("email", table.Email, option);
+                //Response.Cookies.Append("data", data, option);
+
+                return RedirectToAction("SalvarInformacao");
+
+                //if (ModelState.IsValid)
+            //{
+               // _context.Add(table);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
+
             }
             return View(table);
+        }
+
+        public IActionResult SalvarInformacao()
+        {
+            string nome = Request.Cookies["Nome"];
+            string sobrenome = Request.Cookies["sobrenome"];
+            string email = Request.Cookies["Email"];
+            string data = Request.Cookies["Data"];
+            DateTime dataConverte = DateTime.Parse(data);
+
+            if (nome == null)
+            {
+                ViewBag.Dados = "No cookie found";
+            }
+            else
+            {
+                ViewData["Message"] = new Table()
+                {
+                    Nome = nome,
+                    Sobrenome = sobrenome,
+                    Email = email,
+                    DataNascimento = dataConverte,
+                };
+
+                return View();
+            }
+            return View();
         }
 
         // GET: Friends/Edit/5
