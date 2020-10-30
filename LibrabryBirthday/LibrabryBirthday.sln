@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryFriendly", "Cla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLibraryFriendly", "WebLibraryFriendly\WebLibraryFriendly.csproj", "{2D00E3CF-C7E6-41BB-8568-0353D3CDE610}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLibraryFriends", "WebLibraryFriends\WebLibraryFriends.csproj", "{0686B989-F43C-45BD-A6D5-D5B060F69B9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2D00E3CF-C7E6-41BB-8568-0353D3CDE610}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D00E3CF-C7E6-41BB-8568-0353D3CDE610}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D00E3CF-C7E6-41BB-8568-0353D3CDE610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0686B989-F43C-45BD-A6D5-D5B060F69B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0686B989-F43C-45BD-A6D5-D5B060F69B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0686B989-F43C-45BD-A6D5-D5B060F69B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0686B989-F43C-45BD-A6D5-D5B060F69B9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
