@@ -68,18 +68,11 @@ namespace WebLibraryFriends.Controllers
                 Response.Cookies.Append("data", data, option);
 
                 return RedirectToAction("SalvarInformacao");
-
-                //if (ModelState.IsValid)
-            //{
-               // _context.Add(table);
-                //await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
-
             }
             return View(table);
         }
 
-        public IActionResult SalvarInformacao()
+        public async Task<IActionResult> SalvarInformacaoAsync(Table table, bool isPersistent)
         {
             string nome = Request.Cookies["Nome"];
             string sobrenome = Request.Cookies["sobrenome"];
@@ -87,23 +80,23 @@ namespace WebLibraryFriends.Controllers
             string data = Request.Cookies["Data"];
             DateTime dataConverte = DateTime.Parse(data);
 
-            if (nome == null)
+            ViewData["Message"] = new Table()
             {
-                ViewBag.Dados = "No cookie found";
-            }
-            else
-            {
-                ViewData["Message"] = new Table()
-                {
-                    Nome = nome,
-                    Sobrenome = sobrenome,
-                    Email = email,
-                    DataNascimento = dataConverte,
-                };
+                Nome = nome,
+                Sobrenome = sobrenome,
+                Email = email,
+                DataNascimento = dataConverte,
 
-                return View();
+            };
+      
+            if (isPersistent == true)
+            {
+                _context.Add(ViewData["Message"]);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View();
+            
         }
 
         // GET: Friends/Edit/5
