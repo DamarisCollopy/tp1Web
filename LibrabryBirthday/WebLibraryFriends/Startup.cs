@@ -30,9 +30,6 @@ namespace WebLibraryFriends
             services.AddDbContext<ListaAmigosContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("ListaAmigos")));
-
-           
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

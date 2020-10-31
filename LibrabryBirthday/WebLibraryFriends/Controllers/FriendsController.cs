@@ -7,18 +7,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ClassLibraryFriendly;
 using ClassLibraryFriendly.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace WebLibraryFriends.Controllers
 {
     public class FriendsController : Controller
     {
         private readonly ListaAmigosContext _context;
-        private readonly IGerenciamentoCookie gCookie;
 
-        public FriendsController(ListaAmigosContext context, IGerenciamentoCookie gCookie)
+        public FriendsController(ListaAmigosContext context)
         {
             _context = context;
-            this.gCookie = gCookie;
         }
 
         // GET: Friends
@@ -60,14 +59,13 @@ namespace WebLibraryFriends.Controllers
         {
             if (ModelState.IsValid)
             {
-                gCookie.Create(" Nome", "Sobrenome", "Email ", "data");
-                //string data = table.DataNascimento.ToString("dd/MM/yyyy HH:mm:ss");
-                //CookieOptions option = new CookieOptions();
-                //option.Expires = DateTime.Now.AddMinutes(10);
-                //Response.Cookies.Append("nome", table.Nome, option);
-                //Response.Cookies.Append("Sobrenome", table.Sobrenome, option);
-                //Response.Cookies.Append("email", table.Email, option);
-                //Response.Cookies.Append("data", data, option);
+                string data = table.DataNascimento.ToString("dd/MM/yyyy HH:mm:ss");
+                CookieOptions option = new CookieOptions();
+                option.Expires = DateTime.Now.AddMinutes(10);
+                Response.Cookies.Append("nome", table.Nome, option);
+                Response.Cookies.Append("Sobrenome", table.Sobrenome, option);
+                Response.Cookies.Append("email", table.Email, option);
+                Response.Cookies.Append("data", data, option);
 
                 return RedirectToAction("SalvarInformacao");
 
